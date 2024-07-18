@@ -14,14 +14,11 @@ const SpellCheck = () => {
   const handleTextChange = (event) => {
     const inputText = event.target.value;
     setText(inputText);
-
-    let correctedText = inputText;
     let foundCorrection = false;
 
     for (const [typo, correct] of Object.entries(customDictionary)) {
       const regex = new RegExp(`\\b${typo}\\b`, 'gi');
       if (regex.test(inputText)) {
-        correctedText = inputText.replace(regex, correct);
         setCorrection(`Did you mean: <strong>${correct}</strong>?`);
         foundCorrection = true;
         break; // Show correction only for the first match
